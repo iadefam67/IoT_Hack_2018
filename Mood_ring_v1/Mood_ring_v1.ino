@@ -23,7 +23,11 @@ void loop() {
 
   int reading = analogRead(A0);
   Serial.println(reading);
-  //mapping: 
-//  analogWrite(LED, reading);
-//  delay(10);
+
+  digitalWrite(4, LOW);   
+  delay(1000);              
+  digitalWrite(4, HIGH);   
+  delay(1000);  
 }
+
+
