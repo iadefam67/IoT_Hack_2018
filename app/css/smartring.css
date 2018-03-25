@@ -99,3 +99,10 @@ color palette
   text-align: center;
   font-weight: 100;
 }
+
+
+.divWrapper{
+  width:20em;
+  margin: 0 auto;
+  text-align:left;
+  }
