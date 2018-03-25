@@ -23,6 +23,8 @@ color palette
 
 .current-status-wrapper{
   margin-bottom: 50px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #eee;
 }
 
 .ring {
@@ -54,4 +56,45 @@ color palette
   -webkit-box-shadow: inset 0px 0px 96px 1px rgba(0,0,0,0.3);
   -moz-box-shadow: inset 0px 0px 96px 1px rgba(0,0,0,0.3);
   box-shadow: inset 0px 0px 96px 1px rgba(0,0,0,0.3);
+}
+
+.my-aqi{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 70px;
+  font-weight: 100;
+  width: 260px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.my-aqi:before{
+  content: "My AQI";
+  position: absolute;
+  top: -40px;
+  left: 0;
+  font-size: 16px;
+  width: 100%;
+}
+
+.current-status{
+  font-weight: 100;
+}
+
+.current-status span{
+  display: block;
+  font-size: 16px;
+}
+
+.ring-container{
+  margin-bottom: 50px;
+}
+
+.data-module h2{
+  text-align: center;
+  font-weight: 100;
 }
