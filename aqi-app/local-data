@@ -5,7 +5,7 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "aqi": 6
+    "aqi": 7
   },
   "models": {
     "User": {},
@@ -18,7 +18,8 @@
       "2": "{\"timeStamp\":\"2018-03-24T20:16:03.549Z\",\"AQI\":40,\"location\":{\"lat\":0,\"lng\":0},\"status\":2,\"id\":2}",
       "3": "{\"timeStamp\":\"2018-03-24T20:17:03.549Z\",\"AQI\":100,\"location\":{\"lat\":0,\"lng\":0},\"status\":5,\"id\":3}",
       "4": "{\"timeStamp\":\"2018-03-24T20:18:03.549Z\",\"AQI\":300,\"location\":{\"lat\":0,\"lng\":0},\"status\":6,\"id\":4}",
-      "5": "{\"timeStamp\":\"2018-03-24T20:19:03.549Z\",\"AQI\":200,\"location\":{\"lat\":0,\"lng\":0},\"status\":3,\"id\":5}"
+      "5": "{\"timeStamp\":\"2018-03-24T20:19:03.549Z\",\"AQI\":200,\"location\":{\"lat\":0,\"lng\":0},\"status\":3,\"id\":5}",
+      "6": "{\"timeStamp\":\"2018-03-24T20:26:03.549Z\",\"AQI\":300,\"location\":{\"lat\":0,\"lng\":0},\"status\":5,\"id\":6}"
     }
   }
 }
