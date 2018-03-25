@@ -1,15 +1,4 @@
 #include <ArduinoJson.h>
-<<<<<<< HEAD
-=======
-
-// Timestamp library
-#include <TimeLib.h>
-
-// ok to remove?
-//#include <Time.h>
-
-#define LED LED_BUILTIN
->>>>>>> 9138a26f21da52e7754d43f42c31b0e46a639225
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
 #include <NTPClient.h>
@@ -84,11 +73,7 @@ void loop() {
   // send input to switch table via sample variable
   int reading = analogRead(A0);
 
-<<<<<<< HEAD
-  if (reading < 300) {
-=======
   if (reading < baseline) {
->>>>>>> 9138a26f21da52e7754d43f42c31b0e46a639225
     sample = 0;
   }
   if (reading > baseline && reading <= (baseline + 25)) {
@@ -144,11 +129,6 @@ void loop() {
     case 5:
       //Hazardous: Blue
       setColor(0, 0, 1023);
-<<<<<<< HEAD
-
-  }
-=======
->>>>>>> 9138a26f21da52e7754d43f42c31b0e46a639225
 
   }
   // route data to web server
@@ -206,20 +186,8 @@ void loop() {
     // httpCode will be negative on error
     if (httpCode > 0) {
       // HTTP header has been send and Server response header has been handled
-<<<<<<< HEAD
-      Serial.printf("[HTTP] POST... code: %d\n", httpCode);
-
-=======
       USE_SERIAL.printf("[HTTP] POST... code: %d\n", httpCode);
 
-      // file found at server
-      //      if (httpCode == HTTP_CODE_OK) {
-      //        String payload = http.getString();
-      //        USE_SERIAL.println(payload);
-      //      }
-      //http.addHeader("Content-Type", "application/json");
-      //int httpCode = http.POST("message from ");cd
->>>>>>> 9138a26f21da52e7754d43f42c31b0e46a639225
     } else {
       Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
     }
