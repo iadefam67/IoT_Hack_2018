@@ -1,38 +1,62 @@
-console.log("historic-data: ok");
+
+
+historicDay();
 
 function historicDay(){
   var ctx = document.getElementById('myChart').getContext('2d');
 
+  var hoursInDay = timeToday();
 
-
-  var time1, time2, time3;
-
-  time1 = new Date('October 13, 2014 11:13:00');
-  time2 = new Date('October 13, 2014 12:13:00');
-  time3 = new Date('October 13, 2014 13:13:00');
+  console.log(hoursInDay);
 
   var chart = new Chart(ctx, {
-      type: 'line',
+      type: 'scatter',
       data: {
-        labels: [newDate(-5), newDate(-4), newDate(-3), newDate(-2), newDate(-1), newDate(0)],
+        labels: hoursInDay,
         datasets: [{
-          data: [2, 5, 3, 4, 7, 3],
+          data: [30, 35, 100, 200, 300, 200,30, 35, 100, 200, 300, 200],
           borderColor: "rgba(220,20,20,1)",
           backgroundColor: "rgba(220,20,20,0.5)"
         }]
       },
       options: {
-          scales: {
-              xAxes: [{
-                  time: {
-                      unit: 'hour'
-                  }
-              }]
-          }
-      }
-  })
+         scales: {
+           xAxes: [{
+             type: "time",
+             time: {
+               unit: 'hour',
+               round: 'hour',
+               displayFormats: {
+                 day: 'MMM D'
+               }
+             }
+           }],
+           yAxes: [{
+             ticks: {
+               beginAtZero: true
+             }
+           }]
+         }
+       }
+     });
+ }
+
+function newHour(hours) {
+  	return moment().hour(hours).toDate();
 }
 
-function newDate(days) {
-  return moment().add(days, 'd').toDate();
+
+
+function timeToday(){
+  var currentTime = moment().hour();
+  var todayHourArr = [];
+  var hour = 0;
+
+  for(var i = 0; i < currentTime; i++) {
+    todayHourArr.push(hour);
+    hour += 1;
+  }
+
+  return todayHourArr;
+
 }
