@@ -1,14 +1,11 @@
 #include <ArduinoJson.h>
-
-// Timestamp library
-#include <TimeLib.h>
-#include <Time.h>
-
-#define LED LED_BUILTIN
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
+#include <NTPClient.h>
 #include <ESP8266HTTPClient.h>
+
 #define USE_SERIAL Serial
+#define LED LED_BUILTIN
 
 ESP8266WiFiMulti WiFiMulti;
 
@@ -30,15 +27,17 @@ void setColor(int red, int green, int blue) {
 }
 
 void setup() {
+
   Serial.begin(115200);
   Serial.println("Mood Ring Demo");
   pinMode(LED_BUILTIN, OUTPUT);
   // debugging loop
   for (uint8_t t = 4; t > 0; t--) {
-    USE_SERIAL.printf("[SETUP] WAIT %d...\n", t);
-    USE_SERIAL.flush();
+    Serial.printf("[SETUP] WAIT %d...\n", t);
+    Serial.flush();
     delay(1000);
   }
+
   WiFi.mode(WIFI_STA);
   WiFiMulti.addAP("Puppet Guest", "argon4949");
 
@@ -56,6 +55,7 @@ void loop() {
 
   // send input to switch table via sample variable
   int reading = analogRead(A0);
+
   if (reading < 300) {
     sample = 0;
   }
@@ -84,59 +84,83 @@ void loop() {
 
     case 0:
       //Good: Green
-      setColor(0, 1023, 0);    
+      setColor(0, 1023, 0);
       break;
 
     case 1:
       //Moderate: Yellow
-      setColor(1023, 1023, 0);    
+      setColor(1023, 1023, 0);
       break;
 
     case 2:
       //Unhealthy for Sensitive Groups (USG): Orange
       setColor(1023, 300, 100);
-     
+
       break;
 
     case 3:
       //Unhealthy: Red
       setColor(1023, 0, 0);
-     
+
       break;
 
     case 4:
       //Very Unhealthy: Purple
       setColor(900, 0, 1023);
-     
+
       break;
 
     case 5:
       //Hazardous: Blue
       setColor(0, 0, 1023);
-     
+
   }
 
   if ((WiFiMulti.run() == WL_CONNECTED)) {
 
+    NTP.init((char *)"us.pool.ntp.org", UTC0900);
+    NTP.setPollingInterval(60); // Poll every minute
+
+    NTP.onSyncEvent([](NTPSyncEvent_t ntpEvent) {
+      switch (ntpEvent) {
+        case NTP_EVENT_INIT:
+          break;
+        case NTP_EVENT_STOP:
+          break;
+        case NTP_EVENT_NO_RESPONSE:
+          Serial.printf("NTP server not reachable.\n");
+          break;
+        case NTP_EVENT_SYNCHRONIZED:
+          Serial.printf("Got NTP time: %s\n", NTP.getTimeDate(NTP.getLastSync()));
+          break;
+      }
+    });
+    
     HTTPClient http;
 
-    USE_SERIAL.print("[HTTP] begin...\n");
+    Serial.print("[HTTP] begin...\n");
     // configure traged server and url
 
     USE_SERIAL.print("[HTTP] POST...\n");
     // start connection and send HTTP header
 
+    //AQI = Air Quality Index
+    //create Json object to send AQI and timestamp to database
     StaticJsonBuffer<300> JSONbuffer;
     JsonObject& JSONencoder = JSONbuffer.createObject();
 
-    JSONencoder["timeStamp"] = "0";
+    String formattedTime = NTP.getTimeDate(now());
+
+    JSONencoder["timeStamp"] = formattedTime;
     JSONencoder["AQI"] = sample;
     JSONencoder["location"] = 0;
     JSONencoder["status"] = 0;
 
+
     char JSONmessageBuffer[300];
     JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
     Serial.println(JSONmessageBuffer);
+
 
     http.begin("http://10.0.12.158:3000/api/aqi");
     http.addHeader("Content-Type", "application/json");
@@ -146,21 +170,15 @@ void loop() {
     // httpCode will be negative on error
     if (httpCode > 0) {
       // HTTP header has been send and Server response header has been handled
-      USE_SERIAL.printf("[HTTP] POST... code: %d\n", httpCode);
+      Serial.printf("[HTTP] POST... code: %d\n", httpCode);
 
-      // file found at server
-//      if (httpCode == HTTP_CODE_OK) {
-//        String payload = http.getString();
-//        USE_SERIAL.println(payload);
-//      }
-      //http.addHeader("Content-Type", "application/json");
-      //int httpCode = http.POST("message from ");cd
     } else {
-      USE_SERIAL.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
+      Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
     }
 
     http.end();
   }
+  
   delay(100);
 
 }
