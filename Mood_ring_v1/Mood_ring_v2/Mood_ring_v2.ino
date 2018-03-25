@@ -2,7 +2,9 @@
 
 // Timestamp library
 #include <TimeLib.h>
-#include <Time.h>
+
+// ok to remove?
+//#include <Time.h>
 
 #define LED LED_BUILTIN
 #include <ESP8266WiFi.h>
@@ -18,6 +20,8 @@ int greenPin = 5;
 int bluePin = 2;
 // Input sample
 int sample;
+int count = 0;
+int baseline = 250;
 
 void setColor(int red, int green, int blue) {
   red = 1023 - red;
@@ -47,31 +51,47 @@ void setup() {
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
 }
+// sensor callibration 
+int sample_baseline() {
+    setColor(0, 0, 1023);
+    delay(30000);
+    int avg = 0;
+    setColor(1023, 0, 0);
+    for (int i = 0; i < 60; ++i) {
+      avg += analogRead(A0);
+      delay(100);
+    }
+    avg = avg/60;
+    Serial.println(avg);
+    return avg; 
+}
 
 void loop() {
-  //Serial.print(0);  // To freeze the lower limit
-  //Serial.print(" ");
-  //Serial.print(1200);  // To freeze the upper limit
-  //Serial.print(" ");
+  
+  if (count == 0) {
+    baseline = sample_baseline();
+  }
+  count = 1;
 
   // send input to switch table via sample variable
   int reading = analogRead(A0);
-  if (reading < 300) {
+  
+  if (reading < baseline) {
     sample = 0;
   }
-  if (reading > 300 && reading <= 350) {
+  if (reading > baseline && reading <= (baseline + 25)) {
     sample = 1;
   }
-  if (reading > 350 && reading <= 400) {
+  if (reading > (baseline + 25) && reading <= (baseline + 50)) {
     sample = 2;
   }
-  if (reading > 400 && reading <= 450) {
+  if (reading > (baseline + 50) && reading <= (baseline + 100)) {
     sample = 3;
   }
-  if (reading > 450 && reading <= 700) {
+  if (reading > (baseline + 100) && reading <= (baseline + 200)) {
     sample = 4;
   }
-  if (reading > 700) {
+  if (reading > (baseline + 200)) {
     sample = 5;
   }
 
