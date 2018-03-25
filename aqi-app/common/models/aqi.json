@@ -1,0 +1,29 @@
+{
+  "name": "aqi",
+  "plural": "aqi",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "timeStamp": {
+      "type": "string",
+      "required": true
+    },
+    "AQI": {
+      "type": "number",
+      "required": true
+    },
+    "location": {
+      "type": "number"
+    },
+    "status":{
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

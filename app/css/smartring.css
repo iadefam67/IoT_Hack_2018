@@ -1,1 +1,57 @@
-/* smartRing Custom CSS */ 
+/* smartRing Custom CSS */
+/*
+color palette
+#fa0530 - red unhealthy
+#872560 - purple very unhealthy
+#a92237 - maroon hazardous
+#f9c837 - yellow moderate
+#53a757 - green good
+#fc6808 - orange unhealthy
+*/
+
+.container {
+    max-width: 100%;
+    height:auto;
+}
+.status {
+    text-align: center;
+}
+
+.header {
+    text-align: center;
+}
+
+.current-status-wrapper{
+  margin-bottom: 50px;
+}
+
+.ring {
+    width:380px;
+    height: 380px;
+    margin: 10px auto;
+    display: block;
+    background-color:gray;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    border: 5px solid gray;
+    -webkit-box-shadow: 0px 0px 96px 1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 96px 1px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 96px 1px rgba(0,0,0,0.3);
+}
+
+.ring:before{
+  content: "";
+  width: 310px;
+  height: 310px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  border:5px solid #fff;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: inset 0px 0px 96px 1px rgba(0,0,0,0.3);
+  -moz-box-shadow: inset 0px 0px 96px 1px rgba(0,0,0,0.3);
+  box-shadow: inset 0px 0px 96px 1px rgba(0,0,0,0.3);
+}
