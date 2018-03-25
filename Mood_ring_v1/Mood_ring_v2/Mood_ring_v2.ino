@@ -15,7 +15,7 @@ int greenPin = 5;
 int bluePin = 2;
 // Input sample
 int sample;
-int count = 0;
+int count0 = 0;
 int baseline = 250;
 
 void setColor(int red, int green, int blue) {
@@ -65,10 +65,10 @@ int sample_baseline() {
 
 void loop() {
   // initial sensor callibration, hard reset on device to re-callibrate
-  if (count == 0) {
+  if (count0 == 0) {
     baseline = sample_baseline();
   }
-  count = 1;
+  count0 = 1;
 
   // send input to switch table via sample variable
   int reading = analogRead(A0);
