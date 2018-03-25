@@ -33,13 +33,14 @@ module.exports = function(Aqi) {
       var dataset = JSON.parse(data);
       var max = 0;
       var mostRecent = Object.keys(dataset.models.aqi).reduce(function(a,b){
-        console.log(dataset[a] > dataset[b] ? a : b);
+        return dataset[a] > dataset[b] ? a : b
       });
 
 
-      console.log(dataset.models.aqi[2]);
+      console.log(dataset.models.aqi[mostRecent]);
+      return callback(null, dataset.models.aqi[mostRecent]);
     })
-    return callback(null, {"test": "fake"});
+
 
 
   };
