@@ -6,7 +6,7 @@ int redPin = 4;
 int greenPin = 5;
 int bluePin = 2;
  
-int range;
+int sample;
   
 //uncomment this line if using a Common Anode LED
  
@@ -20,7 +20,7 @@ void setup()
 void loop()
 {
 
-  switch (range) {
+  switch (sample) {
    
     case 0:
       //Good: Green 
