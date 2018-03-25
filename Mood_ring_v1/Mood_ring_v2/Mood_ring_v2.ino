@@ -51,23 +51,23 @@ void setup() {
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
 }
-// sensor callibration 
+// sensor callibration
 int sample_baseline() {
-    setColor(0, 0, 1023);
-    delay(30000);
-    int avg = 0;
-    setColor(1023, 0, 0);
-    for (int i = 0; i < 60; ++i) {
-      avg += analogRead(A0);
-      delay(100);
-    }
-    avg = avg/60;
-    Serial.println(avg);
-    return avg; 
+  setColor(0, 0, 1023);
+  delay(30000);
+  int avg = 0;
+  setColor(1023, 0, 0);
+  for (int i = 0; i < 60; ++i) {
+    avg += analogRead(A0);
+    delay(100);
+  }
+  avg = avg / 60;
+  Serial.println(avg);
+  return avg;
 }
 
 void loop() {
-  
+  // initial sensor callibration, hard reset on device to re-callibrate
   if (count == 0) {
     baseline = sample_baseline();
   }
@@ -75,7 +75,7 @@ void loop() {
 
   // send input to switch table via sample variable
   int reading = analogRead(A0);
-  
+
   if (reading < baseline) {
     sample = 0;
   }
@@ -99,43 +99,42 @@ void loop() {
   Serial.println(reading);
 
   // switch colors based on sample reading
-  // roughly equivalent to
   switch (sample) {
 
     case 0:
       //Good: Green
-      setColor(0, 1023, 0);    
+      setColor(0, 1023, 0);
       break;
 
     case 1:
       //Moderate: Yellow
-      setColor(1023, 1023, 0);    
+      setColor(1023, 1023, 0);
       break;
 
     case 2:
       //Unhealthy for Sensitive Groups (USG): Orange
       setColor(1023, 300, 100);
-     
+
       break;
 
     case 3:
       //Unhealthy: Red
       setColor(1023, 0, 0);
-     
+
       break;
 
     case 4:
       //Very Unhealthy: Purple
       setColor(900, 0, 1023);
-     
+
       break;
 
     case 5:
       //Hazardous: Blue
       setColor(0, 0, 1023);
-     
-  }
 
+  }
+  // route data to web server
   if ((WiFiMulti.run() == WL_CONNECTED)) {
 
     HTTPClient http;
@@ -169,10 +168,10 @@ void loop() {
       USE_SERIAL.printf("[HTTP] POST... code: %d\n", httpCode);
 
       // file found at server
-//      if (httpCode == HTTP_CODE_OK) {
-//        String payload = http.getString();
-//        USE_SERIAL.println(payload);
-//      }
+      //      if (httpCode == HTTP_CODE_OK) {
+      //        String payload = http.getString();
+      //        USE_SERIAL.println(payload);
+      //      }
       //http.addHeader("Content-Type", "application/json");
       //int httpCode = http.POST("message from ");cd
     } else {
