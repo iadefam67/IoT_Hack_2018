@@ -2,8 +2,12 @@
 # Air Quality Smart Ring
 
 ## The Team
-Abbie Jones (Full Stack)
-Cynthia Smith (Design)
-Evie Curry (Front End) 
-Lynnae Griffiths (Backend/Hardware)
-Sunmi Bausman (Front End)
+Abbie Jones (Full Stack)   
+Cynthia Smith (Design)   
+Evie Curry (Front End)    
+Lynnae Griffiths (Backend/Hardware)   
+Sunmi Bausman (Front End)   
+
+## The Project
+
+## The Result
