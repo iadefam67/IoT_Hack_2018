@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="header col-md-12">
-                    <h1>Smart Ring</h1>
+                    <h1 class="display-1">Smart Ring</h1>
                 </div>
             </div>
         </div>
@@ -29,24 +29,46 @@
             <div class="current-status-wrapper">
               <div class="row">
                   <div class="col ring-container">
-                        <div class="ring" id="current-smart-ring-color"></div>
+                        <div class="ring" id="current-smart-ring-color">
+                            <div class="my-aqi" id="current-smart-ring-aqi"></div>
+                        </div>
                   </div>
               </div>
               <div class="row">
                   <div class="col text-center">
-                      <h2 id="current-smart-ring-status"></h2>
+                      <h2 class="display-4 current-status" id="current-smart-ring-status"></h2>
                   </div>
               </div>
             </div>
 
             <div class="row">
-                <div class="col historic-data">
+                <div class="col historic-data data-module">
                     <h2>Historic Data</h2>
-                    <canvas id="myChart"></canvas>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="day-tab" data-toggle="tab" href="#day" role="tab" aria-controls="home" aria-selected="true">Day</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="month-tab" data-toggle="tab" href="#month" role="tab" aria-controls="profile" aria-selected="false">Month</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="year-tab" data-toggle="tab" href="#year" role="tab" aria-controls="contact" aria-selected="false">Year</a>
+                      </li>
+                    </ul>
+                    <div class="tab-content" id="historicDataContent">
+                      <div class="tab-pane fade show active" id="day" role="tabpanel" aria-labelledby="day-tab">
+                        <canvas id="myChart"></canvas>
+                      </div>
+                      <div class="tab-pane fade" id="month" role="tabpanel" aria-labelledby="month-tab">month</div>
+                      <div class="tab-pane fade" id="year" role="tabpanel" aria-labelledby="year-tab">year</div>
+                    </div>
+
+
                 </div>
 
 
-                <div class="col regional-data">
+                <div class="col regional-data data-module">
                   <h2>Regional Data</h2>
                 </div>
             </div>
