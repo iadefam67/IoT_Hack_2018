@@ -1,6 +1,10 @@
 ## WWCode IoT Hackathon 2018: Sustainable Futures
 # Air Quality Smart Ring
 
+## Resources
+* Final Source Code: https://github.com/lynnaeg/IoT_Hack_2018/blob/master/Final_Demo_Version.ino
+* Working Source Code with Commit History: https://github.com/lynnaeg/IoT_Hack_2018/blob/master/Mood_ring_v1/Mood_ring_v2/Mood_ring_v2.ino
+* Powerpoint Presentation: https://github.com/lynnaeg/IoT_Hack_2018/blob/master/Team%204%20-%20AQ%20Smart%20Ring%20WWCode.pptx
 ## The Team
 Abbie Jones (Full Stack)   
 Cynthia Smith (Design)   
