@@ -1296,7 +1296,7 @@
       "1280": "{\"timeStamp\":\"0\",\"AQI\":1,\"location\":0,\"status\":0,\"id\":1280}",
       "1281": "{\"timeStamp\":\"0\",\"AQI\":1,\"location\":0,\"status\":0,\"id\":1281}",
       "1282": "{\"timeStamp\":\"0\",\"AQI\":1,\"location\":0,\"status\":0,\"id\":1282}",
-      "1283": "{\"timeStamp\":\"0\",\"AQI\":1,\"location\":0,\"status\":0,\"id\":1283}"
+      "1283": "{\"timeStamp\":\"0\",\"AQI\":300,\"location\":0,\"status\":5,\"id\":1283}"
     }
   }
 }

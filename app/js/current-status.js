@@ -1,5 +1,9 @@
 currentAQI();
 
+setInterval(function() {
+  currentAQI();
+}, 5000);
+
 function currentAQI(){
   var apiURL = 'http://0.0.0.0:3000/api/aqi/current'
   $.ajax({
@@ -11,12 +15,10 @@ function currentAQI(){
 
      var currentStatus = currentColor(finalData.status);
 
-
      $('#current-smart-ring-color').css('background-color', currentStatus[1])
      $('#current-smart-ring-status').html("<span>Your local environment is:</span> " + currentStatus[0]);
      $('#current-smart-ring-aqi').html(finalData.AQI);
 
-     console.log(currentStatus);
    },
    error: function( data ) {
      console.log( 'ERROR: ', data );
