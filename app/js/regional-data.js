@@ -2,11 +2,22 @@ console.log("regional-data: ok");
 
 
 function airNowAPI(){
-  var apiURL = 'http://api.wunderground.com/api/625172310aff38a6/conditions/q/97219.json'
-  $.getJSON(apiURL, function(data){
-    console.log(data.current_observation.display_location.city);
+  var apiURL = 'http://api.waqi.info/feed/shanghai/?token=demo'
+  $.ajax({
+   url: apiURL,
+   dataType: 'json',
+   success: function( data ) {
+     console.log( 'SUCCESS: ', data );
+   },
+   error: function( data ) {
+     console.log( 'ERROR: ', data );
+   }
   });
+
 }
+
+
+
 
 
 airNowAPI();
