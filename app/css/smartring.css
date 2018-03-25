@@ -105,4 +105,12 @@ color palette
   width:20em;
   margin: 0 auto;
   text-align:left;
-  }
+}
+
+.leaflet-container{
+  margin: 0 auto;
+}
+
+footer{
+  margin-top: 50px;
+}

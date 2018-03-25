@@ -10,9 +10,9 @@ function historicDay(){
   console.log(hoursInDay);
 
   var chart = new Chart(ctx, {
-      type: 'scatter',
+      type: 'line',
       data: {
-        labels: hoursInDay,
+        labels: ["12AM", "1AM", "2AM", "3AM", "4AM", "5AM", "6AM", "7AM"],
         datasets: [{
           data: [30, 35, 100, 200, 300, 200,30, 35, 100, 200, 300, 200],
           borderColor: "rgba(220,20,20,1)",
