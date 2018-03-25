@@ -22,7 +22,7 @@
         <div class="container">
             <div class="row">
                 <div class="header col-md-12">
-                    <h1>Smart Ring</h1>
+                    <h1 class="display-1">Smart Ring</h1>
                 </div>
             </div>
         </div>
@@ -34,25 +34,72 @@
             <div class="current-status-wrapper">
               <div class="row">
                   <div class="col ring-container">
-                        <div class="ring" id="current-smart-ring-color"></div>
+                        <div class="ring" id="current-smart-ring-color">
+                            <div class="my-aqi" id="current-smart-ring-aqi"></div>
+                        </div>
                   </div>
               </div>
               <div class="row">
                   <div class="col text-center">
-                      <h2 id="current-smart-ring-status"></h2>
+                      <h2 class="display-4 current-status" id="current-smart-ring-status"></h2>
                   </div>
               </div>
             </div>
 
             <div class="row">
-                <div class="col historic-data">
+                <div class="col historic-data data-module">
                     <h2>Historic Data</h2>
-                    <canvas id="myChart"></canvas>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="day-tab" data-toggle="tab" href="#day" role="tab" aria-controls="home" aria-selected="true">Day</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="month-tab" data-toggle="tab" href="#month" role="tab" aria-controls="profile" aria-selected="false">Month</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="year-tab" data-toggle="tab" href="#year" role="tab" aria-controls="contact" aria-selected="false">Year</a>
+                      </li>
+                    </ul>
+                    <div class="tab-content" id="historicDataContent">
+                      <div class="tab-pane fade show active" id="day" role="tabpanel" aria-labelledby="day-tab">
+                        <canvas id="myChart"></canvas>
+                      </div>
+                      <div class="tab-pane fade" id="month" role="tabpanel" aria-labelledby="month-tab">month</div>
+                      <div class="tab-pane fade" id="year" role="tabpanel" aria-labelledby="year-tab">year</div>
+                    </div>
+
+
                 </div>
 
 
-                <div class="col regional-data">
+                <div class="col regional-data data-module">
                   <h2>Regional Data</h2>
+
+                  <div  id='map'  style='height:30em; width:25em'/>  
+                  <link  rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"  />  
+                  <script  src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>  
+                    
+                  <script>  
+                        var  OSM_URL  =  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';  
+                        var  OSM_ATTRIB  =  '&copy;  <a  href="http://openstreetmap.org/copyright">OpenStreetMap</a>  contributors';  
+                        var  osmLayer  =  L.tileLayer(OSM_URL,  {attribution:  OSM_ATTRIB});  
+                    
+                        var  WAQI_URL    =  "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=_TOKEN_ID_";  
+                        var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
+                        var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});  
+                    
+                        var  map  =  L.map('map').setView([45.523062, -122.676482],  8);  
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        }).addTo(map);
+
+                        L.marker([45.523062, -122.676482]).addTo(map)
+                            .bindPopup('Check your AQI')
+                            .openPopup();  
+                        map.addLayer(osmLayer).addLayer(waqiLayer);  
+                  </script>
+
 
                 </div>
             </div>
@@ -76,31 +123,6 @@
 
 
     <script src="js/linechart.js"></script>
-    <script src="js/regional-data.js"></script>
-
-    <div  id='map'  style='height:300px; width:250px'/>  
-    <link  rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"  />  
-    <script  src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>  
-      
-    <script>  
-          var  OSM_URL  =  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';  
-          var  OSM_ATTRIB  =  '&copy;  <a  href="http://openstreetmap.org/copyright">OpenStreetMap</a>  contributors';  
-          var  osmLayer  =  L.tileLayer(OSM_URL,  {attribution:  OSM_ATTRIB});  
-      
-          var  WAQI_URL    =  "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=_TOKEN_ID_";  
-          var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
-          var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});  
-      
-          var  map  =  L.map('map').setView([45.523062, -122.676482],  8);  
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          }).addTo(map);
-
-          L.marker([45.523062, -122.676482]).addTo(map)
-              .bindPopup('Check your AQI')
-              .openPopup();  
-          map.addLayer(osmLayer).addLayer(waqiLayer);  
-    </script>
 
    
   </body>

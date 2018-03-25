@@ -12,8 +12,9 @@ function currentAQI(){
      var currentStatus = currentColor(finalData.status);
 
 
-     $('#current-smart-ring-color').css('background-color', currentStatus[3])
-     $('#current-smart-ring-status').html(currentStatus[0]);
+     $('#current-smart-ring-color').css('background-color', currentStatus[1])
+     $('#current-smart-ring-status').html("<span>Your local environment is:</span> " + currentStatus[0]);
+     $('#current-smart-ring-aqi').html(finalData.AQI);
 
      console.log(currentStatus);
    },
