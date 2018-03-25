@@ -1,2 +1,13 @@
-# IoT_Hack_2018
-IoT hack hosted by Women Who Code PDX
+## WWCode IoT Hackathon 2018: Sustainable Futures
+# Air Quality Smart Ring
+
+## The Team
+Abbie Jones (Full Stack)   
+Cynthia Smith (Design)   
+Evie Curry (Front End)    
+Lynnae Griffiths (Backend/Hardware)   
+Sunmi Bausman (Front End)   
+
+## The Project
+
+## The Result
