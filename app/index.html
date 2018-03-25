@@ -10,6 +10,11 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/smartring.css">
 
+    <!-- leatlet css --> 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+
     <title>SmartRing</title>
   </head>
   <body>
@@ -70,6 +75,32 @@
 
                 <div class="col regional-data data-module">
                   <h2>Regional Data</h2>
+
+                  <div  id='map'  style='height:30em; width:25em'/>  
+                  <link  rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"  />  
+                  <script  src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>  
+                    
+                  <script>  
+                        var  OSM_URL  =  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';  
+                        var  OSM_ATTRIB  =  '&copy;  <a  href="http://openstreetmap.org/copyright">OpenStreetMap</a>  contributors';  
+                        var  osmLayer  =  L.tileLayer(OSM_URL,  {attribution:  OSM_ATTRIB});  
+                    
+                        var  WAQI_URL    =  "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=_TOKEN_ID_";  
+                        var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
+                        var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});  
+                    
+                        var  map  =  L.map('map').setView([45.523062, -122.676482],  8);  
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        }).addTo(map);
+
+                        L.marker([45.523062, -122.676482]).addTo(map)
+                            .bindPopup('Check your AQI')
+                            .openPopup();  
+                        map.addLayer(osmLayer).addLayer(waqiLayer);  
+                  </script>
+
+
                 </div>
             </div>
         </div>
@@ -79,9 +110,9 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
@@ -89,12 +120,9 @@
 
     <script src="js/current-status.js"></script>
     <script src="js/historic-data.js"></script>
-    <script src="js/regional-data.js"></script>
-<<<<<<< HEAD
-    <script src="js/external-AQI.js"></script>
-=======
+
+
     <script src="js/linechart.js"></script>
 
->>>>>>> b712d4bbb82a67d99577c71aaa68ce2b94d0b1d8
   </body>
 </html>
