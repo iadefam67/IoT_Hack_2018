@@ -8,7 +8,7 @@
   },
   "properties": {
     "timeStamp": {
-      "type": "date",
+      "type": "string",
       "required": true
     },
     "AQI": {
@@ -16,7 +16,7 @@
       "required": true
     },
     "location": {
-      "type": "geopoint"
+      "type": "number"
     },
     "status":{
       "type": "number"
